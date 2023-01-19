@@ -4,17 +4,16 @@ arrN.sort()
 M = int(input())
 arrM = list(map(int, input().strip().split()))
 
-def find(a, b, N):
-    start = 0
-    end = N
-    if N == 1 and a[N//2] != b:
+def find(b, start, end):
+    global arrN
+    if end-start == 1 and arrN[(end-start)//2+start] != b:
         return 0
-    elif a[N//2] == b:
+    elif arrN[(end-start)//2+start] == b:
         return 1
-    if a[N//2] > b:
-        return find(a[:N//2], b, N//2)
-    elif a[N//2] < b:
-        return find(a[N//2:], b, len(a[N//2:]))
+    elif arrN[((end-start)//2+start)] > b:
+        return find(b, start, (end-start)//2+start)
+    elif arrN[((end-start)//2+start)] < b:
+        return find(b, (end-start)//2+start, end)
     
 for i in arrM:
-    print(find(arrN, i, N))
+    print(find(i, 0, N))
